@@ -31,6 +31,8 @@ body::before {
     background-color: #34495e;
     color: #fff;
     z-index: 100;
+    overflow: hidden;
+
 }
 
 .logo {

@@ -14,7 +14,6 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
     HomeComponent,
     SpotifyComponent,
     
-    
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { SpotifyService } from './servizi/spotify.service';
 import { isPlatformBrowser } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgsRevealModule } from 'ngx-scrollreveal';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
