@@ -106,9 +106,17 @@ section::before{
     background: url('https://www.transparenttextures.com/patterns/stardust.png');
     opacity: 0.8; /* Regola l'opacità per renderlo più discreto */
     z-index: 1;
-
+    animation: moveStars 60s linear infinite; /* Applica l'animazione */
 }
 
+@keyframes moveStars {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 200% -200%; /* Sposta le stelle verso l'alto a destra */
+    }
+}
 .skill-item {
     background: #34495e;
     border-radius: 10px;
@@ -299,7 +307,8 @@ section::before{
 iframe{
     z-index: 100;
     width: 30vw;
-    height: 8vh;
+    height: 9vh;
+    margin-top: 0.5vh;
 }
 
 .music-player{
