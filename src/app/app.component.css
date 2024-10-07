@@ -9,21 +9,11 @@
     background-image: url('https://images.unsplash.com/photo-1484589065579-248aad0d8b13?q=80&w=1959&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');  /* Stelle e spazio */
 }
 
-.competenze:hover{
-    background-image: url('/assets/animated_image_slow.gif');  /* Stelle e spazio */
-
-}
-
-
 
 .progetti {
     background-image: url('https://plus.unsplash.com/premium_photo-1666901328578-7fcbe821735e?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');  /* Galassie luminose */
 }
 
-
-.progetti:hover {
-    background-image: url('/assets/animated_saturn_slow.gif');  /* Galassie luminose */
-}
 .esperienza {
     background-image: url('https://images.unsplash.com/photo-1532798369041-b33eb576ef16?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');  /* Nebulosa elegante */
 }

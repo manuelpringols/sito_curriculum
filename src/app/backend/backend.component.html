@@ -1,0 +1,162 @@
+<section id="backend-section">
+    <div class="container">
+        <h2>Backend: Realizzazione con Spring Boot</h2>
+
+        <div class="section-content">
+            <h3>1. Introduzione</h3>
+            <p>
+                Il backend del mio sito web è stato sviluppato utilizzando Spring Boot, un framework Java che permette di creare API RESTful scalabili e sicure. Ho implementato una serie di funzionalità per la gestione degli utenti e dei dati tramite un database collegato.
+            </p>
+
+            <h3>2. Autenticazione con JWT</h3>
+            <p>
+                Per garantire la sicurezza dell'applicazione, ho implementato l'autenticazione tramite JSON Web Token (JWT). Un esempio pratico di Spring Security richiede l'autenticazione con JWT. 
+                È possibile registrarsi per ottenere il token JWT e successivamente utilizzare questo token per effettuare il login.
+            </p>
+
+            <button style="z-index: 2;" (click)="toggleCode()" class="toggle-button">
+                {{ showCode ? 'Mostra meno' : 'Mostra più' }}
+            </button>
+
+            <div *ngIf="showCode" class="code-container">
+                <pre><code>
+                    public class JwtAuthenticationFilter extends OncePerRequestFilter {{ '{' }}
+
+                    private final JwtService jwtService;
+                    private final UserDetailsService userDetailsService;
+                
+                    &#64;Override
+                    protected void doFilterInternal( // la prima cosa che deve fare il filtro è controllare se la richiesta ha il jwt
+                        &#64;NonNull HttpServletRequest request, &#64;NonNull HttpServletResponse response,
+                        &#64;NonNull FilterChain filterChain) throws ServletException, IOException {{ '{' }}
+                        
+                        final String authHeader = request.getHeader("Authorization");
+                        final String jwt;
+                        if (authHeader == null || !authHeader.startsWith("Bearer ")) {{ '{' }}
+                            filterChain.doFilter(request, response);
+                            return;
+                        {{ '}' }}
+                        
+                        jwt = authHeader.substring(7);
+                        final String userEmail = jwtService.extractUsername(jwt);
+                
+                        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {{ '{' }}
+                            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+                
+                            if (jwtService.isTokenValid(jwt, userDetails)) {{ '{' }}
+                                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                                    userDetails, null, userDetails.getAuthorities());
+                                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                                SecurityContextHolder.getContext().setAuthentication(authToken);
+                            {{ '}' }}
+                        {{ '}' }}
+                
+                        filterChain.doFilter(request, response);
+                    {{ '}' }}
+                </code></pre>
+            </div>
+
+            <h3>3. Registrazione e Accesso</h3>
+
+            <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+                <h4>Registrazione</h4>
+                <p>Inserire Email e password casuali</p>
+                <input type="email" name="email" placeholder="Email" ngModel required>
+                <input type="password" name="password" placeholder="Password" ngModel required>
+                <button type="submit">Registrati</button>
+            </form>
+            <div *ngIf="showRegisterInfo" class="info-message">
+                <p>Quando clicchi su "Registrati", il backend genera un token JWT e lo restituisce al browser. Questo token viene salvato localmente per future richieste di accesso.</p>
+                <img src="/assets/google.png">
+                <p>il localStorage puo'essere visionato anche dalla console di google</p>
+            </div>
+
+            <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+                <h4>Accesso</h4>
+                <p>Inserire Email e password scelti precedentemente</p>
+                <input type="email" name="email" placeholder="Email" ngModel required>
+                <input type="password" name="password" placeholder="Password" ngModel required>
+                <button type="submit">Accedi</button>
+            </form>
+            <div *ngIf="showLoginInfo" class="info-message">
+                <p>Quando clicchi su "Accedi", il token JWT salvato viene inviato al backend per verificare l'autenticità. Se le credenziali sono corrette, ottieni accesso alle funzionalità protette.</p>
+              
+            </div>
+
+            <h3>4. Connessione al Database</h3>
+            <p>
+                Il backend è collegato a un database MySQL. La configurazione di base è gestita tramite il file <code>application.properties</code>:
+            </p>
+            <pre><code>
+spring.datasource.url=jdbc:postgresql://localhost:5432/sito-curriculum
+spring.datasource.username=root
+spring.datasource.password=password
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.properties.hibernate.default_schema=public
+spring.jpa.show-sql=true
+            </code></pre>
+
+            <section id="jwt-section">
+                <div class="container">
+                    <h2>Processo di Autenticazione con JWT</h2>
+            
+                    <div class="section-content">
+                        <h3>1. Registrazione e Ricezione del Token JWT</h3>
+                        <p>
+                            Quando un utente si registra inserendo email e password, il backend genera un token JWT. Questo token viene restituito e salvato localmente nel browser dell'utente.
+                        </p>
+            
+                        <h3>2. Autenticazione con JWT</h3>
+                        <p>
+                            Dopo la registrazione, l'utente accede utilizzando le stesse credenziali. Il token JWT salvato viene inviato con la richiesta di accesso. Se il token è valido, l'utente ottiene accesso a funzionalità specifiche protette.
+                        </p>
+            
+                        <h3>3. Visualizzazione dei Progetti</h3>
+                        <p>
+                            I progetti sono accessibili a tutti gli utenti, indipendentemente dall'autenticazione. Tuttavia, l'accesso alle funzionalità protette avviene solo dopo che l'utente ha effettuato il login e ha fornito il token JWT.
+                        </p>
+            
+                        <!-- Immagine del flusso JWT -->
+                        <div class="image-container">
+                            <img src="assets/gpt.jpg" alt="Processo JWT">
+                            <p class="image-caption">Flusso del token JWT: Registrazione ➔ Ricezione JWT ➔ Salvataggio in localStorage</p>
+                        </div>
+
+                        <section id="disclaimer-section">
+                            <div class="container">
+                                <h2>Disclaimer: Un Sito, Molte Possibilità 🚀</h2>
+                                <p>
+                                    <strong>Questo sito web è stato deployato con GitHub Pages</strong>, il che significa che attualmente funziona come una <strong>pagina web statica</strong>. GitHub Pages è un modo rapido e gratuito per ospitare progetti come questo, ma c’è un dettaglio importante: <strong>il backend non è attualmente connesso</strong>.
+                                </p>
+                                <p>
+                                    Tuttavia, non lasciarti ingannare dalla sua semplicità! Tutto è già stato predisposto per essere integrato con un backend reale. Un server come <strong>Hetzner</strong> o qualsiasi altro hosting è perfetto per connettere il backend Spring Boot al frontend di questo sito.
+                                </p>
+                        
+                                <h3>Come fare?</h3>
+                                <ul>
+                                    <li><strong>Configura il server</strong> su Hetzner (o un altro provider) con Java e MySQL/PostgreSQL.</li>
+                                    <li><strong>Lancia l'applicazione Spring Boot</strong> per gestire le API, l'autenticazione JWT e le operazioni del database.</li>
+                                    <li><strong>Collega il frontend al backend</strong>, aggiornando semplicemente l'URL delle API nel progetto Angular.</li>
+                                </ul>
+                        
+                                <p class="final-note">
+                                    <strong>Et voilà!</strong> 🔗 Il sito diventerà completamente dinamico, e tutto il processo di autenticazione, gestione dei dati e delle richieste sarà effettivamente funzionante come descritto!
+                                </p>
+                        
+                                <p>
+                                    Nel frattempo, puoi esplorare liberamente il <strong>frontend</strong> per vedere come sono strutturate le funzionalità e le logiche di un'applicazione moderna.
+                                </p>
+                        
+                                <p class="final-call">
+                                    <strong>Vuoi vederlo in azione su un server vero?</strong> 🚀 Basta un piccolo deploy su Hetzner e il gioco è fatto!
+                                </p>
+                            </div>
+                        </section>
+                        
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</section>
