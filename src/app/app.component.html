@@ -6,8 +6,7 @@
   <iframe
   title="Spotify Embed: Recommendation Playlist "
   src="https://open.spotify.com/embed/playlist/32PxgMvUxrKixd4STHbdg7?utm_source=generator&theme=0"
-  width="100%"
-  height="100%"
+  width="30%"
 
   frameBorder="0"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -165,16 +164,40 @@
       </div>
     </div>
   </section>
+
+  <section [@fadeIn]="state" id="auth" class="section">
+    <p class="intro-text">
+      Per poter visionare l'area progetti, ho strutturato una piccola autenticazione con JWT token. 
+      Ho ideato un modulo di autenticazione che, una volta compilato con le credenziali corrette, mostrerà un token JWT. 
+      Questo token dovrà essere incollato nel modulo di registrazione per accedere a determinate funzionalità. 
+      In questo modo, il sistema dimostra come l'autenticazione e l'autorizzazione possano funzionare a livello teorico di backend.
+    </p>
+  
+    <!-- Pulsante per scorrere verso la sezione app-backend -->
+    <button (click)="scrollToBackend()" >Autenticazione</button>
+  
+    
+  </section>
+  
+  
+  
   
 
 
-  <section   [@fadeIn]="state" id="progetti" class="section">
+  <!-- progetti.component.html -->
+<!-- progetti.component.html -->
+
+
+
+
+<section [ngStyle]="{ filter: isAuthenticated ? 'none' : 'blur(15px)' }" id="progetti" class="section">
+  <div>
     <div class="container">
       <h2 class="section-title">Progetti</h2>
       <p class="intro-text">
         Anche se non ho ancora portato a termine progetti completi utilizzabili pubblicamente, sto lavorando su alcuni progetti personali che rappresentano le mie competenze e la mia passione per lo sviluppo. Ecco i principali su cui sto concentrando le mie energie.
       </p>
-  
+
       <div class="project">
         <h3><i class="fas fa-mobile-alt"></i> PinGo</h3>
         <p>
@@ -185,23 +208,74 @@
           <img src="assets/5.jpg" alt="Screenshot 2 di PinGo" class="screenshot">
           <img src="assets/3.jpg" alt="Screenshot 3 di PinGo" class="screenshot">
         </div>
+
+       
         <p class="project-status">
+          
           <strong>Stato del Progetto:</strong> In fase di sviluppo.
         </p>
+
+        
       </div>
-  
+
       <div class="project">
         <h3><i class="fas fa-tasks"></i> CRM per PinGo</h3>
         <p>
           Questo è un progetto interno, nato dall’esigenza di gestire meglio le attività e le task del team che lavora su PinGo. Ho realizzato una sorta di **CRM** utilizzando tecnologie di front-end e back-end per monitorare le attività in corso, le task completate e quelle da assegnare. Questo strumento ci permette di mantenere una visione chiara sullo stato dei lavori e migliorare la produttività.
         </p>
+        <div class="screenshot-container">
+          <img src="assets/pingoDashboard1.png" alt="Screenshot 1 di PinGoDashboard" class="screenshot">
+          <img src="assets/pingoDashboard2.png" alt="Screenshot 2 di PinGoDashboard" class="screenshot">
+          <img src="assets/pingoDashboard3.png" alt="Screenshot 3 di PinGoDashboard" class="screenshot">
+        </div>
         <p class="project-status">
           <strong>Stato del Progetto:</strong> In utilizzo nel team, ma ancora in fase di sviluppo per miglioramenti futuri.
         </p>
       </div>
+
+      <!-- Overlay per la finta autenticazione -->
+     
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<!-- NgForHttp
+
+  <section   [@fadeIn]="state" id="progetti" class="section">
+    <div  class="container">
+      <h2 class="section-title">Progetti</h2>
+      <p class="intro-text">
+        Anche se non ho ancora portato a termine progetti completi utilizzabili pubblicamente, sto lavorando su alcuni progetti personali che rappresentano le mie competenze e la mia passione per lo sviluppo. Ecco i principali su cui sto concentrando le mie energie.
+      </p>
+  
+      <div *ngFor="let project of projectInformation" class="project">
+        <h3><i class="fas fa-mobile-alt"></i> {{project.title}}</h3>
+        <p>
+          
+          <strong>{{project.title}}</strong> {{project.description}}
+        <div class="screenshot-container">
+          <img src="assets/1.jpg" alt="Screenshot 1 di PinGo" class="screenshot">
+          <img src="assets/5.jpg" alt="Screenshot 2 di PinGo" class="screenshot">
+          <img src="assets/3.jpg" alt="Screenshot 3 di PinGo" class="screenshot">
+        </div>
+        <p class="project-status">
+          <strong>Stato del Progetto:</strong> In fase di sviluppo.
+        </p>
+      </div>
+  
+     
   
     </div>
   </section>
+  -->
   
 
 
@@ -255,7 +329,7 @@
   </div>
 </section>
 
-<app-backend></app-backend>
+<app-backend (authStatus)="onAuthStatusChange($event)" id="app-backend"></app-backend>
 
 
 

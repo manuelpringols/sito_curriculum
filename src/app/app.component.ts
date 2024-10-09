@@ -3,6 +3,7 @@ import { SpotifyService } from './servizi/spotify.service';
 import { isPlatformBrowser } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgsRevealModule } from 'ngx-scrollreveal';
+import { HttpService } from './servizi/http.service';
 
 @Component({
   selector: 'app-root',
@@ -18,18 +19,39 @@ import { NgsRevealModule } from 'ngx-scrollreveal';
   ]
 })
 export class AppComponent {
+username: any;
+password: any;
+
+isAuthenticated: boolean=true;
+
 isPlaying: boolean= false;
 state: string = 'hidden';
-constructor(private spotifyService: SpotifyService, @Inject(PLATFORM_ID) private platformId: Object,private el: ElementRef, private renderer: Renderer2) {}
+jwtToken: any;
+constructor(private spotifyService: SpotifyService, @Inject(PLATFORM_ID) private platformId: Object,private el: ElementRef, private renderer: Renderer2, private http:HttpService) {}
 
 
   title = 'sito_curriculum';
 minHeight: any;
 trackId = '7H7NyZ3G075GqPx2evsfeb';
 
+projectInformation:any=[]
 
 
 
+onAuthStatusChange(authStatus: boolean) {
+  this.isAuthenticated = authStatus; // Qui authStatus deve essere un booleano
+}
+
+
+
+scrollToBackend() {
+  const backendSection = document.getElementById('app-backend');
+  if (backendSection) {
+    backendSection.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  console.log("mim")
+}
 
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
@@ -45,6 +67,9 @@ trackId = '7H7NyZ3G075GqPx2evsfeb';
       // Assicurati che `document` e `window` siano disponibili solo nel browser
       this.spotifyService.createSpotifyPlayer('embed-iframe', 'spotify:playlist:37i9dQZF1DXcBWIGoYBM5M');
     }
+
+    
+
   }
 
   @HostListener('window:scroll', [])
@@ -59,6 +84,29 @@ trackId = '7H7NyZ3G075GqPx2evsfeb';
       this.state = 'hidden';
     }
   }
+
+  getProjectData(){
+      this.http.getProjectInformation().subscribe((data)=>{
+        this.projectInformation = data
+      })
+  }
+
+
+
+authenticate() {
+  throw new Error('Method not implemented.');
+  }
+  showAuthModal() {
+  throw new Error('Method not implemented.');
+  }
+  login() {
+  throw new Error('Method not implemented.');
+  }
+  register() {
+  throw new Error('Method not implemented.');
+  }
+
+
 }
 
 

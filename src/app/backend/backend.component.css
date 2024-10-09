@@ -298,3 +298,19 @@ pre {
   font-weight: 600;
 }
 
+.info-message div{
+  display:flex ;
+  align-items: center;
+  margin-bottom: 3vw;
+
+
+}
+
+.info-message span{
+  width: fit-content;
+  box-shadow: 1px 1px 10px 5px rgba(30, 182, 88, 0.329);
+  border-radius: 1vw;
+  padding: 0.5vw;
+  margin-left: 1vw;
+  
+}

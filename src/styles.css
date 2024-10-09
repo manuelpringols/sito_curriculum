@@ -5,6 +5,7 @@ body, html {
     font-family: 'Poppins', sans-serif;  /* Imposta il font */
     background: radial-gradient(circle, rgba(30,30,47,1) 0%, rgba(17,17,30,1) 100%);
     color: #fff;
+    overflow-x: hidden;
 }
 
 body::before {
