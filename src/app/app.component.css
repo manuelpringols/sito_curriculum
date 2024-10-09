@@ -169,7 +169,9 @@ section::before {
 
 .skill-list li {
     margin-bottom: 40px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5vw;
+    padding: 0.3vw;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
 
@@ -190,6 +192,13 @@ section::before {
 
 /* Contenitore per gli screenshot */
 .screenshot-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    z-index: 100;
+}
+
+.screenshot-container2 {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
