@@ -22,7 +22,7 @@ export class AppComponent {
 username: any;
 password: any;
 
-isAuthenticated: boolean=true;
+isAuthenticated: boolean=false;
 
 isPlaying: boolean= false;
 state: string = 'hidden';
