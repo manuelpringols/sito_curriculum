@@ -68,21 +68,21 @@ body::before {
 /* Navbar */
 .navbar {
     font-size: 1.3rem;
-    height: 5.7vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 30px;
     background-color: #34495e;
     color: #fff;
-    z-index: 100;
-    overflow: hidden;
+    z-index: 1000;
 
 }
 
 .logo {
     font-size: 1.9rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 .nav-links {
@@ -193,15 +193,26 @@ body::before {
         flex-direction: column;
     }
 
-    .navbar {
-        flex-direction: column;
-        gap: 10px;
-    }
+   
 
     .card {
         width: 100%; 
     }
 }
+
+@media (max-width: 768px) {
+    .navbar-links {
+        display: none; /* Nasconde i link */
+    }
+
+    .navbar-title {
+        text-align: center; /* Centra il titolo */
+        font-size: 1.5em; /* Modifica la dimensione del font se necessario */
+        margin: 10px 0; /* Margine intorno al titolo */
+    }
+}
+
+
 
 /* Effetti del testo */
 h1, h2, p {
