@@ -1,4 +1,46 @@
 /* Stile di base */
+/* Chrome, Edge, Safari */
+/* Stile per Chrome e altri browser basati su WebKit */
+/* Stile per Chrome e altri browser basati su WebKit */
+/* Stile per Chrome e altri browser basati su WebKit */
+::-webkit-scrollbar {
+    width: 8px; /* Larghezza della scrollbar */
+    background: #1e0644; /* Colore di sfondo della scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #5b0080; /* Colore della thumb */
+    border-radius: 10px; /* Angoli arrotondati per Chrome */
+}
+
+/* Stile per Firefox */
+
+
+/* Includere anche gli stili per Edge se necessario */
+
+
+/* Assicurati che le regole si applicano solo a Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        background: #1e0644; /* Sfondo */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #5b0080; /* Colore della thumb */
+        border-radius: 100px; /* Arrotondamento */
+    }
+
+
+    html{
+        scrollbar-width: thin; /* Imposta la scrollbar sottile */
+        scrollbar-color: #5b0080 #1e0644; /* thumb e sfondo */
+    }
+}
+
+
+
+
 body, html {
     margin: 0;
     padding: 0;
@@ -6,6 +48,7 @@ body, html {
     background: radial-gradient(circle, rgba(30,30,47,1) 0%, rgba(17,17,30,1) 100%);
     color: #fff;
     overflow-x: hidden;
+    font-size: 1.1rem;
 }
 
 body::before {
@@ -24,7 +67,8 @@ body::before {
 
 /* Navbar */
 .navbar {
-    height: 6.1vh;
+    font-size: 1.3rem;
+    height: 5.7vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,7 +81,7 @@ body::before {
 }
 
 .logo {
-    font-size: 1.5em;
+    font-size: 1.9rem;
     font-weight: bold;
 }
 
@@ -118,8 +162,8 @@ body::before {
 }
 
 .card {
-    width: 250px;
-    height: 200px;         
+    width: 280px;
+    height: 260px;         
     display: flex;
     flex-direction: column; 
     align-items: center;      
@@ -129,7 +173,7 @@ body::before {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: white;
+    color: rgb(255, 255, 255);
     background-size: cover;        
     background-position: center;   
     z-index: 1000;
