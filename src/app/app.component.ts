@@ -61,6 +61,9 @@ scrollToBackend() {
   }
 
   
+  ngOnInit(){
+    this.getProjectDescription()
+  }
 
   ngAfterViewInit(){
     if (isPlatformBrowser(this.platformId)) {
@@ -85,9 +88,11 @@ scrollToBackend() {
     }
   }
 
-  getProjectData(){
-      this.http.getProjectInformation().subscribe((data)=>{
+  getProjectDescription(){
+      this.http.getProjectDescription(1).subscribe((data)=>{
         this.projectInformation = data
+        console.log("PROJETTILE LETALI ",this.projectInformation)
+
       })
   }
 
