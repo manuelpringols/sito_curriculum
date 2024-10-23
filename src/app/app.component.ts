@@ -63,6 +63,8 @@ scrollToBackend() {
   
   ngOnInit(){
     this.getProjectDescription()
+    console.log("PROJETTILE LETALI ",this.projectInformation)
+
   }
 
   ngAfterViewInit(){
@@ -89,7 +91,7 @@ scrollToBackend() {
   }
 
   getProjectDescription(){
-      this.http.getProjectDescription(1).subscribe((data)=>{
+      this.http.getProjectDescription(2).subscribe((data)=>{
         this.projectInformation = data
         console.log("PROJETTILE LETALI ",this.projectInformation)
 
