@@ -62,8 +62,7 @@ scrollToBackend() {
 
   
   ngOnInit(){
-    this.getProjectDescription()
-    console.log("PROJETTILE LETALI ",this.projectInformation)
+  
 
   }
 
